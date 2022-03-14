@@ -34,6 +34,6 @@
     "copy-webpack-plugin": "^5.0.0"
   },
   "dependencies": {
-    "th_rust": "file:../pkg"
+    "wasm_test": "file:../pkg"
   }
 }

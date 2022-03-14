@@ -1,6 +1,15 @@
-import * as wasm from "th_rust";
+import * as wasm from "wasm_test";
 
-const pre = document.getElementById("thrust-canvas");
+// const canvas = document.getElementById("main-canvas");
+// canvas.width = window.innerWidth - 60;
+// canvas.height = 400;
+
+// let context = canvas.getContext("2d");
+// let start_background_color = "gray";
+
+// context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+// context.fillStyle = start_background_color;
+// context.fillRect(0, 0, window.innerWidth, window.innerHeight);
 
 
 // const fps_counter = wasm.FpsCounter.new()
@@ -19,4 +28,5 @@ const pre = document.getElementById("thrust-canvas");
 
 //   requestAnimationFrame(renderLoop);
 
-  wasm.start();  
+wasm.start();  
+console.debug("app started.");
