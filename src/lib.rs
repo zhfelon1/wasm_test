@@ -1,5 +1,7 @@
+mod ui;
+mod res;
 use wasm_bindgen::prelude::*;
-mod app;
+
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
 // allocator.
@@ -10,9 +12,16 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 use winit::{
     event::{Event, WindowEvent},
+    event_loop::{ControlFlow, EventLoop},
     window::{WindowBuilder, Window},
     platform::web::WindowExtWebSys
 };
+
+
+#[wasm_bindgen]
+pub fn set_resource_data(name: &str, data: &[u8]) {
+    res::set_cache_data(name, data);
+}
 
 //canvas_id 来自html的canvas
 #[wasm_bindgen]
@@ -21,14 +30,8 @@ pub fn start(){
     console_error_panic_hook::set_once();
 
     log::info!("start web");
-    //试验结果，winit可以用，无报错
-    use winit::{
-        event::{Event, WindowEvent},
-        event_loop::{ControlFlow, EventLoop},
-    };
 
     let event_loop = EventLoop::new();
-
     let window = WindowBuilder::new()
         .with_title("Wasm_test")
         .build(&event_loop)
@@ -73,7 +76,7 @@ pub fn start(){
             Event::MainEventsCleared => {
                 window.request_redraw();
 
-                log::info!("Event::MainEventsCleared");
+                //log::info!("Event::MainEventsCleared");
             },
             _ => (),
         }
@@ -94,12 +97,7 @@ pub fn create_render_area(window: &Window, canvas_id: &str)  {
     //html放入画布
     body.append_child(&canvas).unwrap();
 
-    //初始化ui
-    let app = app::TemplateApp::default();
-    init_egui(canvas_id, Box::new(app));
-}
-
-pub fn init_egui(canvas_id: &str, app: Box<dyn epi::App>) {
-    egui_web::start(canvas_id, app);
+    //init ui
+    ui::init_egui(canvas_id);
 }
 

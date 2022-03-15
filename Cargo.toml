@@ -2,7 +2,7 @@
 name = "wasm_test"
 version = "0.1.0"
 authors = ["zhfelon1 <zhfelon@qq.com>"]
-edition = "2018"
+edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
@@ -27,10 +27,20 @@ wee_alloc = { version = "0.4.5", optional = true }
 instant = { version = "0.1", features = [ "wasm-bindgen", "inaccurate" ] }
 getrandom = { version = "0.2", features = ["js"] }
 winit = "0.26.1"
-egui = "0.17.0"
-egui_web = "0.17.0"
-egui-winit = "0.17.0"
-epi = "0.17.0"
+image = "0.24.1"
+
+#ui
+egui = {package = "egui", path = "./egui/egui"}
+egui_web = {package = "egui_web", path = "./egui/egui_web"}
+epi = {package = "epi", path = "./egui/epi"}
+epaint = {package = "epaint", path = "./egui/epaint"}
+egui-winit = {package = "egui-winit", path = "./egui/egui-winit"}
+glow = "0.11.2"
+
+lazy_static = "1.4.0"
+dot_vox = "4.0"
+ron = { version = "0.7", default-features = false }
+assets_manager = {version = "0.7", features = ["bincode", "ron", "json"]}
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.13"
